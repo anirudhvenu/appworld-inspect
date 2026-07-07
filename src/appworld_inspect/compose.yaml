@@ -1,0 +1,9 @@
+services:
+  default:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: appworld-inspect:0.1.3.post1
+    mem_limit: 2g
+    cpus: 2
+    init: true
