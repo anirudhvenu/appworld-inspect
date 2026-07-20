@@ -5,6 +5,7 @@
 ## Implementation
 
 - The full AppWorld environment (engine, apps, task data) runs inside a Docker sandbox; the container serves AppWorld's environment server on localhost.
+- Task data is fetched at image build time from AppWorld's S3 release (`data-0.1.0.bundle`) and verified against a pinned SHA-256 before unpacking (`download_data.py`); the build fails on mismatch. The `appworld` library itself is pinned to `0.1.3.post1`, so both hops of the supply chain are fixed.
 - The agent gets a single `execute_code` tool that forwards Python to the task world's stateful IPython shell — the same `world.execute` interface used by the paper's agents.
 - Task instructions and supervisor details are loaded from the environment at solve time (the host never decrypts AppWorld's anti-contamination data bundles; only task-id split lists are vendored).
 - Scoring calls AppWorld's own evaluation (`world.evaluate()`) inside the sandbox. Metrics: **accuracy** = Task Goal Completion (TGC), plus **scenario_goal_completion** (SGC: a scenario counts only if all its task variations pass), matching the paper.

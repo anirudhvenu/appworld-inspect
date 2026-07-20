@@ -12,7 +12,7 @@ uv run inspect eval appworld_inspect/appworld --model <model>          # test_no
 uv run inspect eval appworld_inspect/appworld -T split=dev --limit 10  # small dev-split run
 ```
 
-Requires Docker: the AppWorld environment (engine, apps, task data) is built into a sandbox image on first run; task data is downloaded from AppWorld's versioned storage at image build time and never redistributed by this repository.
+Requires Docker: the AppWorld environment (engine, apps, task data) is built into a sandbox image on first run; task data is downloaded from AppWorld's versioned storage at image build time, verified against a pinned SHA-256, and never redistributed by this repository.
 
 See **[src/appworld_inspect/README.md](src/appworld_inspect/README.md)** for the eval's design, task parameters, scoring (TGC/SGC), and baseline results.
 
